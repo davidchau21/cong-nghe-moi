@@ -25,7 +25,7 @@ app.post('/save', (req, res) => {
     const params = {
         "id": id,
         "name": name,
-        "course": course_type,
+        "course_type": course_type,
         "semester": semester,
         "department": department
     }
@@ -38,23 +38,18 @@ app.post('/save', (req, res) => {
 app.post('/delete', (req, res) => {
     const listCheckboxSelected = Object.keys(req.body);
 
-    if(listCheckboxSelected.length <= 0){
+    if (listCheckboxSelected.length <= 0) {
         return res.redirect('/');
     }
 
-    function onDeleteItem(length) {
-        const maCanXoa = Number(listCheckboxSelected[length]);
-
-        data = data.filter(item => item.maCanXoa !== maCanXoa);
-        if(length > 0){
-            console.log('Data delete:: ', JSON.stringify(data));
-            onDeleteItem(length-1);
-        }else {
-            return res.redirect('/');
-        }
+    for (let i = 0; i < listCheckboxSelected.length; i++) {
+        const idToDelete = Number(listCheckboxSelected[i]);
+        courses = courses.filter(course => course.id !== idToDelete);
     }
-    onDeleteItem(listCheckboxSelected.length - 1);
-})
+
+    return res.redirect('/');
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

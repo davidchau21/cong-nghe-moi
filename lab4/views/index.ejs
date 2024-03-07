@@ -1,55 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
     <div class="content">
-        <form action="/save" method="post">
-            <label for="id">STT:</label>
-            <input type="text" id="id" name="id" required><br>
+      <form action="/save" method="post">
+        <label for="id">STT:</label>
+        <input type="text" id="id" name="id" required /><br />
 
-            <label for="name">Tên môn học:</label>
-            <input type="text" id="name" name="name" required><br>
+        <label for="name">Tên môn học:</label>
+        <input type="text" id="name" name="name" required /><br />
 
-            <label for="course_type">Loại môn học:</label>
-            <input type="text" id="course_type" name="course_type" required><br>
+        <label for="course_type">Loại môn học:</label>
+        <input type="text" id="course_type" name="course_type" required /><br />
 
-            <label for="semester">Học kỳ:</label>
-            <input type="text" id="semester" name="semester" required><br>
+        <label for="semester">Học kỳ:</label>
+        <input type="text" id="semester" name="semester" required /><br />
 
-            <label for="department">Khoa:</label>
-            <input type="text" id="department" name="department" required><br>
+        <label for="department">Khoa:</label>
+        <input type="text" id="department" name="department" required /><br />
 
-            <button type="submit">Thêm môn học</button>
-        </form>
-        <table>
-                <caption>Danh sách các môn học</caption>
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên môn học</th>
-                    <th>Loại môn học</th>
-                    <th>Học kỳ</th>
-                    <th>Khoa</th>
-                </tr>
-            </thead>
+        <button type="submit">Thêm môn học</button>
+      </form>
+      <table>
+        <caption>
+          Danh sách các môn học
+        </caption>
+        <thead>
+          <tr>
+            <th></th>
+            <th>STT</th>
+            <th>Tên môn học</th>
+            <th>Loại môn học</th>
+            <th>Học kỳ</th>
+            <th>Khoa</th>
+          </tr>
+        </thead>
 
-            <tbody>
-                <% courses.forEach(item => { %>
-                    <tr>
-                        <td><%= item.id %></td>
-                        <td><%= item.name %></td>
-                        <td><%= item.course_type %></td>
-                        <td><%= item.semester %></td>
-                        <td><%= item.department %></td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
+        <tbody>
+          <% courses.forEach(item => { %>
+          <tr>
+            <td>
+              <input type="checkbox" value="<%= item.id %>" />
+            </td>
+            <td><%= item.id %></td>
+            <td><%= item.name %></td>
+            <td><%= item.course_type %></td>
+            <td><%= item.semester %></td>
+            <td><%= item.department %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <button id="deleteButton">Xóa hàng được chọn</button>
     </div>
-</body>
+    <script>
+      document
+        .getElementById("deleteButton")
+        .addEventListener("click", function () {
+          var checkboxes = document.querySelectorAll(
+            'input[type="checkbox"]:checked'
+          );
+          var ids = Array.from(checkboxes).map((checkbox) => checkbox.value);
+          if (ids.length > 0) {
+            fetch("/delete", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ ids: ids }),
+            })
+              .then((response) => {
+                if (response.ok) {
+                  console.log("Courses deleted successfully");
+                }
+              })
+              .catch((error) =>
+                console.error("Error deleting courses:", error)
+              );
+          }
+        });
+    </script>
+  </body>
 </html>
