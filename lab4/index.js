@@ -42,12 +42,17 @@ app.post('/delete', (req, res) => {
         return res.redirect('/');
     }
 
-    for (let i = 0; i < listCheckboxSelected.length; i++) {
-        const idToDelete = Number(listCheckboxSelected[i]);
-        courses = courses.filter(course => course.id !== idToDelete);
+    function onDeleteItem(length){
+        const idCanXoa = Number(listCheckboxSelected[length]);
+        data = data.filter(item => item.id !== idCanXoa);
+        if(length > 0){
+            console.log('Data delete:: ', JSON.stringify(data));
+            onDeleteItem(length -1);
+        }else {
+            return res.redirect('/');
+        }
     }
-
-    return res.redirect('/');
+    onDeleteItem(listCheckboxSelected.length -1);
 });
 
 
