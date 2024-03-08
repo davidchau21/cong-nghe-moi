@@ -42,7 +42,7 @@
         </thead>
 
         <tbody>
-          <!-- <% courses.forEach(item => { %>
+          <% courses.forEach(item => { %>
           <tr>
             <td><%= item.id %></td>
             <td><%= item.name %></td>
@@ -53,19 +53,7 @@
               <input type="checkbox" value="<%= item.id %>" />
             </td>
           </tr>
-          <% }); %> -->
-          <% for(var i = 0; i < courses.length; i++) {%>
-                    <tr>
-                        <<td><%= courses[i].id %></td>
-                        <td><%= courses[i].name %></td>
-                        <td><%= courses[i].course_type %></td>
-                        <td><%= courses[i].semester %></td>
-                        <td><%= courses[i].department %></td>
-                        <td>
-                          <input type="checkbox" value="<%= item.id %>" />
-                        </td>
-                    </tr>
-                    <% } %>
+          <% }); %>
         </tbody>
       </table>
       <button id="deleteButton">Xóa hàng được chọn</button>
