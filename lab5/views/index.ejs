@@ -24,6 +24,17 @@
                 <th>Hình ảnh</th>
                 <th>Chọn</th>
             </tr>
+            <!-- <% data.forEach(item => { %>
+                <tr>
+                    <td><%= item.maSanPham %></td>
+                    <td><%= item.tenSanPham %></td>
+                    <td><%= item.soLuong %></td>
+                    <td><img src="<%= item.image %>" alt="avt_<%= item.maSanPham %>" 
+                        width="48" height="48" /> </td>
+                    <td><input type="checkbox" name="<%= item.maSanPham %>" id="<%= item.maSanPham %>"></td>    
+                </tr>
+                <% }); %> -->
+
             <% for(let i = 0; i < data.length; i++){ %>
                 <tr>
                     <td><%= data[i].maSanPham %></td>
@@ -34,6 +45,7 @@
                     <td><input type="checkbox" name="<%= data[i].maSanPham %>" id="<%= data[i].maSanPham %>"></td>    
                 </tr>
                 <% } %>
+
         </table>
         <input type="submit" value="Xoa">
     </form>
