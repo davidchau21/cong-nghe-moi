@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>CHUONG TRINH QUAN LY BAN HANG</h1>
+    <form action="/save" method="POST" enctype="multipart/form-data">
+        <input type="text" name="maTraiCay" placeholder="Nhap ma trai cay"> <br>
+        <input type="text" name="tenTraiCay" placeholder="Nhap ten trai cay"> <br>
+        <input type="text" name="donViTinh" placeholder="Nhap ten don vi tinh"> <br>
+        <input type="text" name="gia" placeholder="Nhap ma gia"> <br>
+        <input type="file" name="image" accept="image/*"> <br>
+        <input type="submit" value="Them">
+    </form>
+    <h3>DANH SACH SAN PHAM</h3>
+    <form action="/delete" method="POST" enctype="multipart/form-data">
+        <table border="true">
+            <tr>
+                <th>Ma san pham</th>
+                <th>Ten trai cay</th>
+                <th>Don vi tinh</th>
+                <th>Gia</th>
+                <th>Hinh anh</th>
+                <th>Chon</th>
+            </tr>
+            <% for(let i = 0; i < data.length; i++){ %>
+                <tr>
+                    <td>
+                        <%= data[i].maTraiCay %>
+                    </td>
+                    <td>
+                        <%= data[i].tenTraiCay %>
+                    </td>
+                    <td>
+                        <%= data[i].donViTinh %>
+                    </td>
+                    <td>
+                        <%= data[i].gia %>
+                    </td>
+                    <td>
+                        <img src="<%= data[i].image %>" alt="avt_<%= data[i].maTraiCay %>" width="50" height="50">
+                    </td>
+                    <td>
+                        <input type="checkbox" name="<%= data[i].maTraiCay %>" id="<%= data[i].maTraiCay %>">
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+            <input type="submit" value="Xoa">
+        </form>
+        
+</body>
+
+</html>
