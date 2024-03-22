@@ -12,9 +12,15 @@ process.env.AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE = "1"; // kể từ nă
 
 // Cấu hình aws sdk để truy cập vào Cloud Aws thông qua tài khoản IAM user
 AWS.config.update({
+<<<<<<< HEAD
     region: process.env.REGION,
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
+=======
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+>>>>>>> ef77abdca561b2ba2ce2d6d5ae62402df63b695d
 });
 const s3 = new AWS.S3();
 const dynamodb = new AWS.DynamoDB.DocumentClient();
@@ -190,4 +196,8 @@ app.post('/delete', upload.fields([]), (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> ef77abdca561b2ba2ce2d6d5ae62402df63b695d
